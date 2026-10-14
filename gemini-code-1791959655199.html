@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七色のHello World</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #222;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        #message {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* 七色に変化するアニメーション */
+        @keyframes rainbow {
+            0% { color: #ff0000; } /* 赤 */
+            14% { color: #ff7f00; } /* オレンジ */
+            28% { color: #ffff00; } /* 黄 */
+            42% { color: #00ff00; } /* 緑 */
+            57% { color: #00ffff; } /* 水色 */
+            71% { color: #0000ff; } /* 青 */
+            85% { color: #8b00ff; } /* 紫 */
+            100% { color: #ff0000; } /* 赤に戻る */
+        }
+
+        .show {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+            animation: rainbow 3s infinite linear;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ff007f;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #ff3399;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="message">Hello World</div>
+    <button id="colorButton">ボタンを押してね！</button>
+
+    <script>
+        const button = document.getElementById('colorButton');
+        const message = document.getElementById('message');
+
+        button.addEventListener('click', () => {
+            // すでにクラスがついている場合は一度外して、再度アニメーションをトリガーする
+            message.classList.remove('show');
+            
+            // わずかに遅延させてクラスを再付与（アニメーションをリセットするため）
+            setTimeout(() => {
+                message.classList.add('show');
+            }, 10);
+        });
+    </script>
+
+</body>
+</html>
